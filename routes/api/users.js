@@ -21,6 +21,8 @@ router.post(
         check('password', 'Please enter a password with more than 6 characters').isLength({ min: 6 })
     ],
     async (req, res) => {
+
+
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -72,8 +74,8 @@ router.post(
                     if (err) throw err;
                     res.json({ token })
                 }
-            )
-
+            );
+            
         } catch (error) {
             console.log('INICIO DEL ERROR', error.message, 'FIN DEL ERROR',);
             res.status(500).send('Server error');
