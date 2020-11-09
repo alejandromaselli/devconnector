@@ -1,9 +1,26 @@
 const express = require('express');
+const connectDB = require('./config/connection');
+const authRouter = require('./routes/api/auth');
 
 const app = express();
 
-app.get('/', (req, res) => res.send('It works!'))
+//Connect DB
+connectDB();
+
+// init Middleware
+app.use(express.json({ extedned: false }));
+//app.use(express.urlencoded());
+
+app.use('/api/auth', authRouter);
+
+app.get('/', (req, res) => res.send('It works!'));
+
+// Define routes
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
+app.use('/api/posts', require('./routes/api/posts'))
+app.use('/api/profile', require('./routes/api/profile'))
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server running in port ${port}`))
+app.listen(port, () => console.log(`Server running in port ${port}`));
