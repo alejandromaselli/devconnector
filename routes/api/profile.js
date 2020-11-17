@@ -4,7 +4,6 @@ const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const { response } = require('express');
 
 //@route    GET api/profile/me
 //@desc     GET current user's profile
@@ -279,7 +278,7 @@ router.put(
             fieldofstudy,
             from,
             to,
-            current = false,
+            current,
             description
         } = req.body;
 
